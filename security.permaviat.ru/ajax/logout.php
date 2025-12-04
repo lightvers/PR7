@@ -5,10 +5,10 @@
 	$IdUser = $_SESSION["user"];
 	$IdSession = $_SESSION["IdSession"];
 
-	$Sql = "SELECT `session` . *, `users`.`login`".
-	"FROM `session` `session` ".
-	"JOIN `users` `users` ON `users`.`id` = `session`.`IdUser`".
-	"WHERE `session`.`Id` = {$IdSession}";
+	$Sql = "SELECT `session`.*, `users`.`login` " .
+       "FROM `session` " .
+       "JOIN `users` ON `users`.`id` = `session`.`IdUser` " .
+       "WHERE `session`.`Id` = {$IdSession}";
 
 	$Query = $mysqli->query($Sql);
 	$Read = $Query->fetch_array();
@@ -16,13 +16,12 @@
 	$TimeStart = strtotime($Read["DateStart"]);
 	$TimeNow = time();
 	$Ip = $Read["Ip"];
-	$TimeDelta = gmdate("H:i:s", ($TimeDelta - $TimeStart));
-	$DateStart = date("Y-m-d H:i:s");
-	$login = $Read["login"];
+	$TimeDelta = gmdate("H:i:s", ($TimeNow - $TimeStart));
+	$DateNow = date("Y-m-d H:i:s");
+	$Login = $Read["login"];
 
-	$Sql = "INSERT INTO ".
-	" `logs`( `Ip`, `IdUser`, `Date`, `TimeOnline`, `Event`) ".
-	"VALUES ('{$Ip}','{$IdUser}','{$Date}','{$TimeDelta}','Пользователь {$Login} покинул этот мир')";
+	$Sql = "INSERT INTO `logs`(`Ip`, `IdUser`, `Date`, `TimeOnline`, `Event`) " .
+	"VALUES ('{$Ip}', '{$IdUser}', '{$DateNow}', '{$TimeDelta}', 'Пользователь {$Login} вышел из системы')";
 	$mysqli->query($Sql);
 
 	session_destroy();
