@@ -19,18 +19,18 @@
 		$Ip = $_SERVER["REMOTE_ADDR"];
 		$DateStart = date(format: "Y-m-d H:i:s");
 
-		$Sql = "INSERT INTO `session`(`IdUser`, `Ip`, `DateStart`, `DateNow`) VALUES ({$id},'{$Ip}','{$DateStart}','{$DateSatrt}')";
-		$mysqli->query(query: $Sql);
+		$Sql = "INSERT INTO `session`(`IdUser`, `Ip`, `DateStart`, `DateNow`) VALUES ({$id},'{$Ip}','{$DateStart}','{$DateStart}')";
+		$mysqli->query($Sql);
 
 		$Sql = "SELECT `Id` FROM `session` WHERE `DateStart` = '{$DateStart}';";
-		$Query = $mysqli->query(query: $Sql);
+		$Query = $mysqli->query($Sql);
 		$Read = $Query->fetch_assoc();
 		$_SESSION["IdSession"] = $Read["Id"];
 
-		$Sql = "INSERT INTO" .
-		" `logs`(`id`, `Ip`, `IdUser`, `Date`, `TimeOnline`, `Event`) ".
+		$Sql = "INSERT INTO".
+		"`logs`(`Ip`, `IdUser`, `Date`, `TimeOnline`, `Event`) ".
 		"VALUES ('{$Ip}','{$id}','{$DateStart}','00:00:00', 'Пользователь {$login} авторизовался')";
-		$mysqli->query(query: $Sql);
+		$mysqli->query($Sql);
 	}
 	echo md5(md5($id));
 ?>

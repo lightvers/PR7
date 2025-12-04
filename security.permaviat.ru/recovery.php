@@ -3,6 +3,7 @@
 	if (isset($_SESSION['user'])) {
 		if($_SESSION['user'] != -1) {
 			include("./settings/connect_datebase.php");
+			include("./settings/session.php");
 			
 			$user_query = $mysqli->query("SELECT * FROM `users` WHERE `id` = ".$_SESSION['user']);
 			while($user_read = $user_query->fetch_row()) {

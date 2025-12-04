@@ -1,6 +1,8 @@
 <?php
 	session_start();
 	include("./settings/connect_datebase.php");
+	include("./settings/session.php");
+
 	
 	if (isset($_SESSION['user'])) {
 		if($_SESSION['user'] != -1) {
@@ -90,7 +92,7 @@
 							alert("Логин или пароль не верный.");
 						} else {
 							localStorage.setItem("token", _data);
-							//location.reload();
+							location.reload();
 							loading.style.display = "none";
 							button.className = "button";
 						}
