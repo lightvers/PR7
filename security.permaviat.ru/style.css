@@ -90,12 +90,12 @@ html, body {
 	min-height: 150px;
 }
 .main .content .specialty:first-child {
-	//background-image: URL("img/specialty_1(1).png");
+
 	background-color: #fff;
 }
 
 .main .content .specialty:first-child .slider {
-	//background-image: URL("img/specialty_1(2).png");
+
 	background-color: #fff;
 }
 
@@ -162,7 +162,7 @@ html, body {
     display: block;
     text-decoration: none;
     padding-top: 10px;
-    //float: right;
+    float: right;
 	text-shadow: 1px 1px 2px black;
 }
 .main .content .specialty .description a:hover {
@@ -344,3 +344,31 @@ html, body {
 	width: calc(100% - 135px);
 	height: 50px;
 }
+
+/* Таблица */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+table th, table td {
+    border: 1px solid #000000;
+    padding: 12px 15px;
+}
+
+table tr {
+    border-bottom: 1px solid #000000;
+}
+
+table tr:nth-child(even) {
+    background-color: #000000;
+}
+
+table tr:hover {
+    background-color: #000000;
+}
+

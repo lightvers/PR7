@@ -52,10 +52,10 @@
 							$Read = $Query->fetch_assoc();
 							$Read = $Query->fetch_assoc();
 
-							$timeEnd = strtotime($Read["DateNow"]);
+							$TimeEnd = strtotime($Read["DateNow"]);
 							$TimeNow = time();
 
-							$TimeDelta = round($TimeNow - $TimeEnd)/60;
+							$TimeDelta = round(($TimeNow - $TimeEnd)/60);
 							echo "<br>Последняя активная сессия была: {$TimeDelta} минут назад";
 
 						}

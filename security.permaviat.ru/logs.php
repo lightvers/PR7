@@ -31,7 +31,7 @@
 			<a href=#><img src = "img/logo1.png"/></a>
 			<div class="name">
 				<a href="index.php">
-					<div class="subname">БЗОПАСНОСТЬ  ВЕБ-ПРИЛОЖЕНИЙ</div>
+					<div class="subname">БЕЗОПАСНОСТЬ  ВЕБ-ПРИЛОЖЕНИЙ</div>
 					Пермский авиационный техникум им. А. Д. Швецова
 				</a>
 			</div>
@@ -42,8 +42,17 @@
 				<input type="button" class="button" value="Выйти" onclick="logout()"/>
 				
 				<div class="name">Журнал событий</div>
-			
-				Административная панель служит для создания, редактирования и удаления записей на сайте.
+
+				<table>
+					<tr>
+						<td style="165px;">Дата и время</td>
+						<td style="165px;">Ip Пользователя</td>
+						<td style="165px;">Время в сети</td>
+						<td style="165px;">Статус</td>
+						<td>Произошедшее событие</td>
+					</tr>
+					<tbody></tbody>
+				</table>
 			
 				<div class="footer">
 					© КГАПОУ "Авиатехникум", 2020
@@ -54,7 +63,45 @@
 		</div>
 		
 		<script>
-			
+			GetEvents();
+			function GetEvents() {
+				$.ajax({
+					url         : 'ajax/events/get.php',
+					type        : 'POST', // важно!
+					data        : null,
+					cache       : false,
+					dataType    : 'html',
+					// отключаем обработку передаваемых данных, пусть передаются как есть
+					processData : false,
+					// отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
+					contentType : false, 
+					// функция успешного ответа сервера
+					success: GetEventsAjax, 
+					// функция ошибки
+					error: function( ){
+						console.log('Системная ошибка!');
+						
+					}
+				});
+			}
+			function GetEventsAjax (_data) {
+				console.log(_data);
+
+				let $Table = $("table > tbody");
+				let Events = JSON.parse(_data);
+
+				Events.forEach((Event) => {
+					$Table.append(`
+						<tr>
+							<td>${Event["Date"]}</td>
+							<td>${Event["Ip"]}</td>
+							<td>${Event["TimeOnline"]}</td>
+							<td>${Event["Status"]}</td>
+							<td>${Event["Event"]}</td>
+						</tr>
+					`);
+				})
+			}
 		</script>
 	</body>
 </html>
