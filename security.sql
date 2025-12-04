@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3307
--- Время создания: Ноя 20 2024 г., 12:45
+-- Хост: 127.0.0.1:3306
+-- Время создания: Дек 04 2025 г., 11:41
 -- Версия сервера: 8.0.30
--- Версия PHP: 8.1.9
+-- Версия PHP: 8.0.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,6 +33,46 @@ CREATE TABLE `comments` (
   `IdPost` int NOT NULL COMMENT 'Код поста',
   `Messages` varchar(1000) NOT NULL COMMENT 'Сообщение'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `comments`
+--
+
+INSERT INTO `comments` (`Id`, `IdUser`, `IdPost`, `Messages`) VALUES
+(17, 1, 1, 'gdgdfgdf'),
+(18, 8, 1, 'dfgfddfd'),
+(19, 8, 1, 'weewfwesef'),
+(20, 8, 1, 'ascsdsdsdfd'),
+(21, 8, 1, 'awrwertewrtwerwer'),
+(22, 8, 1, 'ghjgjhg'),
+(23, 24, 1, 'fgdrgdrgedgdf'),
+(24, 24, 1, 'ghghyytrt6yrt'),
+(25, 24, 1, 'ftyhfghg'),
+(26, 24, 1, 'gugggfhgfh'),
+(27, 24, 1, 'ghyhyhffgfgfffg'),
+(28, 24, 1, 'sdsresrewrer');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `logs`
+--
+
+CREATE TABLE `logs` (
+  `id` int NOT NULL,
+  `Ip` varchar(255) NOT NULL,
+  `IdUser` int NOT NULL,
+  `Date` date NOT NULL,
+  `TimeOnline` time NOT NULL,
+  `Event` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `logs`
+--
+
+INSERT INTO `logs` (`id`, `Ip`, `IdUser`, `Date`, `TimeOnline`, `Event`) VALUES
+(42, '127.0.0.1', 24, '2025-12-04', '00:00:00', 'Пользователь  оставил комментарий к записи [Id: 1]: sdsresrewrer');
 
 -- --------------------------------------------------------
 
@@ -62,6 +102,20 @@ INSERT INTO `news` (`id`, `title`, `text`, `img`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `session`
+--
+
+CREATE TABLE `session` (
+  `Id` int NOT NULL,
+  `IdUser` int NOT NULL,
+  `Ip` varchar(255) NOT NULL,
+  `DateStart` datetime NOT NULL,
+  `DateNow` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `users`
 --
 
@@ -78,7 +132,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `login`, `password`, `roll`) VALUES
 (1, 'admin', 'Asdfg123', 1),
-(8, 'user', 'Asdfg123', 0);
+(24, 'user', 'Asdfg123', 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -91,10 +145,22 @@ ALTER TABLE `comments`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Индексы таблицы `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `session`
+--
+ALTER TABLE `session`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Индексы таблицы `users`
@@ -110,7 +176,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT COMMENT 'Код', AUTO_INCREMENT=17;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT COMMENT 'Код', AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT для таблицы `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -119,10 +191,16 @@ ALTER TABLE `news`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT для таблицы `session`
+--
+ALTER TABLE `session`
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

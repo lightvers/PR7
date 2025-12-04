@@ -38,6 +38,17 @@
 		}
 		// обновляем пароль
 		$mysqli->query("UPDATE `users` SET `password`='".md5($password)."' WHERE `login` = '".$login."'");
+		
+		// Логирование смены пароля
+		$Ip = $_SERVER["REMOTE_ADDR"];
+		$DateStart = date("Y-m-d H:i:s");
+		
+		$IdSession = isset($_SESSION["IdSession"]) ? $_SESSION["IdSession"] : "NULL";
+
+		$Sql = "INSERT INTO `logs`(`Ip`, `IdUser`, `Date`, `TimeOnline`, `Event`, `IdSession`) ".
+			   "VALUES ('{$Ip}','{$id}','{$DateStart}','00:00:00', 'Пользователь {$login} запросил восстановление пароля', {$IdSession})";
+		$mysqli->query($Sql);
+		
 		// отсылаем на почту
 		//mail($login, 'Безопасность web-приложений КГАПОУ "Авиатехникум"', "Ваш пароль был только что изменён. Новый пароль: ".$password);
 	}
