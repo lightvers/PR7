@@ -15,6 +15,9 @@
 	
 	if($id != -1) {
 		$_SESSION['user'] = $id;
+
+		$Ip = $_SERVER["REMOTE_ADDR"];
+		echo $Ip;
 	}
 	echo md5(md5($id));
 ?>
