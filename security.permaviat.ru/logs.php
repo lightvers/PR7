@@ -411,7 +411,7 @@
 			});
 		}
 
-
+		//создаем время, берем ивенты и считаем по часам
 		function renderActivityChart(events) {
 			const hourlyCounts = Array(24).fill(0);
 
@@ -424,6 +424,7 @@
 				hourlyCounts[hour]++;
 				}
 			});
+			//отрисовка диаграммы
 			const ctx = document.getElementById('activityChart').getContext('2d');
 			Chart.getChart('activityChart')?.destroy();
 
@@ -434,8 +435,8 @@
 					datasets: [{
 						label: 'Активность пользователей (событий в час)',
 						data: hourlyCounts,
-						backgroundColor: 'rgba(54, 162, 235, 0.6)',
-						borderColor: 'rgba(54, 162, 235, 1)',
+						backgroundColor: 'rgba(255, 92, 132, 0.6)',
+						borderColor: 'rgba(235, 54, 93, 1)',
 						borderWidth: 1
 					}]
 				},

@@ -356,19 +356,7 @@ table {
 }
 
 table th, table td {
-    border: 1px solid #000000;
     padding: 12px 15px;
 }
 
-table tr {
-    border-bottom: 1px solid #000000;
-}
-
-table tr:nth-child(even) {
-    background-color: #000000;
-}
-
-table tr:hover {
-    background-color: #000000;
-}
 
