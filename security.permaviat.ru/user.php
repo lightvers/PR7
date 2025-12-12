@@ -12,10 +12,8 @@
 			
 			if($user_to_read[0] == 1) header("Location: login.php");
 		}
- 	} else header(header: "Location: login.php");
-	
+ 	} else header("Location: login.php");
 	 include("./settings/session.php");
-
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -56,20 +54,32 @@
 						echo $user_to_read[0];
 					?>
 
-					<?
-						$Sql = "SELECT * FROM `session` WHERE `IdUser` = {$_SESSION["user"]} ORDER BY `DateStart` DESC";
-						$Query = $mysqli->query($Sql);
-						if ($Query->num_rows > 1) {
-							$Read = $Query->fetch_assoc();
-							$Read = $Query->fetch_assoc();
+					<?php
+						$sql = "SELECT * FROM `session` WHERE `id_user` = {$_SESSION['user']} ORDER BY `date_start` DESC";
+						$res = $mysqli->query($sql);
+						if($res->num_rows > 1){
+							$read = $res->fetch_assoc();
+							$read = $res->fetch_assoc();
 
-							$TimeEnd = strtotime($Read["DateNow"]);
-							$TimeNow = time();
+							$time_end = strtotime($read['date_now']);
+							$time_now = time();
 
-							$TimeDelta = round(($TimeNow - $TimeEnd)/60);
-							echo "<br>Последняя активная сессия была: {$TimeDelta} минут назад";
+							if(round(($time_now - $time_end) / 60) > 59){
+								$time_delta = round(($time_now - $time_end) / 60 / 60);
+								$status = "<br>последняя активная сессия была: {$time_delta} часов назад";
+								if(round(($time_now - $time_end) / 60 / 60) > 24){
+									$time_delta = round(($time_now - $time_end) / 60 / 60 / 24);
+									$status = "<br>последняя активная сессия была: {$time_delta} дней назад";
+								}
 
-						}
+							} else {
+								$time_delta = round(($time_now - $time_end) / 60);
+								$status = "<br> последняя активная сессия была: {$time_delta} минут назад";
+							}
+
+							echo $status;
+
+						} 
 					?>
 				</div>
 			

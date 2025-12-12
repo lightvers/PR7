@@ -113,7 +113,7 @@
 			function GetEvent() {
 				$.ajax({
 					url         : 'ajax/events/get.php',
-					type        : 'POST', // важно!
+					type        : 'POST', 
 					data        : null,
 					cache       : false,
 					dataType    : 'html',
@@ -149,7 +149,7 @@
 			function logout() {
 				$.ajax({
 					url         : 'ajax/logout.php',
-					type        : 'POST', // важно!
+					type        : 'POST', 
 					data        : null,
 					cache       : false,
 					dataType    : 'html',
@@ -164,10 +164,10 @@
 				});
 			}
 
-			function filter_by_date(){
+			function filter_by_date(){ //фильр по дате
 				$.ajax({
 					url         : 'ajax/events/get.php',
-					type        : 'POST', // важно!
+					type        : 'POST',
 					data        : null,
 					cache       : false,
 					dataType    : 'html',
@@ -202,10 +202,10 @@
 
 			}
 
-			function filter_by_ip(){
+			function filter_by_ip(){ //фильтр айпи
 				$.ajax({
 					url         : 'ajax/events/get.php',
-					type        : 'POST', // важно!
+					type        : 'POST', 
 					data        : null,
 					cache       : false,
 					dataType    : 'html',
@@ -248,10 +248,10 @@
 
 			}
 
-			function filter_by_time(){
+			function filter_by_time(){ //фильтры по времени
 				$.ajax({
 					url         : 'ajax/events/get.php',
-					type        : 'POST', // важно!
+					type        : 'POST', 
 					data        : null,
 					cache       : false,
 					dataType    : 'html',
@@ -295,7 +295,7 @@
 			function filter_by_status() {
 				const filterType = $("#status_filter").val();
 
-				$.ajax({
+				$.ajax({ //время в сети
 					url: 'ajax/events/get.php',
 					type: 'POST',
 					dataType: 'json',
@@ -354,7 +354,7 @@
 			function filter_by_event() {
 			const filterType = $("#event_filter").val();
 
-			$.ajax({
+			$.ajax({ //действия + комментарии
 				url: 'ajax/events/get.php',
 				type: 'POST',
 				dataType: 'json',
@@ -413,7 +413,7 @@
 
 		//создаем время, берем ивенты и считаем по часам
 		function renderActivityChart(events) {
-			const hourlyCounts = Array(24).fill(0);
+			const hourlyCounts = Array(24).fill(0); //массив времени
 
 			events.forEach(event => {
 				const date = new Date(event.date.replace(' ', 'T')); 
@@ -431,7 +431,7 @@
 			new Chart(ctx, {
 				type: 'bar',
 				data: {
-					labels: Array.from({length: 24}, (_, i) => `${i.toString().padStart(2, '0')}:00`),
+					labels: Array.from({length: 24}, (_, i) => `${i.toString().padStart(2, '0')}:00`), //отрисовка массива времени
 					datasets: [{
 						label: 'Активность пользователей (событий в час)',
 						data: hourlyCounts,
