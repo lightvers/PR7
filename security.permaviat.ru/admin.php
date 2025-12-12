@@ -42,25 +42,24 @@
 				<input type="button" class="button" value="Выйти" onclick="logout()"/>
 				
 				<div class="name">Административная панель</div>
+				<a href="./logs.php">Зайти в логи</a><br>
 			
 				Административная панель служит для создания, редактирования и удаления записей на сайте.
+
+				<?php
+					$sql = "SELECT * FROM `session` WHERE `id_user` = {$_SESSION['user']} ORDER BY `date_start` DESC";
+					$res = $mysqli->query($sql);
+					if($res->num_rows > 1){
+						$read = $res->fetch_assoc();
+						$read = $res->fetch_assoc();
+
+						$time_end = strtotime($read['date_now']);
+						$time_now = time();
+						$time_delta = round(($time_now - $time_end) / 60);
+						echo "<br> последняя активная сессия была: {$time_delta} минут назад";
+					} 
+				?>
 			
-					<?
-						$Sql = "SELECT * FROM `session` WHERE `IdUser` = {$_SESSION["user"]} ORDER BY `DateStart` DESC";
-						$Query = $mysqli->query($Sql);
-						if ($Query->num_rows > 1) {
-							$Read = $Query->fetch_assoc();
-							$Read = $Query->fetch_assoc();
-
-							$TimeEnd = strtotime($Read["DateNow"]);
-							$TimeNow = time();
-
-							$TimeDelta = round(($TimeNow - $TimeEnd)/60);
-							echo "<br>Последняя активная сессия была: {$TimeDelta} минут назад";
-
-						}
-					?>
-
 				<div class="footer">
 					© КГАПОУ "Авиатехникум", 2020
 					<a href=#>Конфиденциальность</a>
